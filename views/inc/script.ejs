@@ -1,0 +1,95 @@
+<!-- Back-to-top -->
+<a href="#top" id="back-to-top"><i class="las la-angle-double-up"></i></a>
+
+<!-- JQuery min js -->
+<script src="assets/plugins/jquery/jquery.min.js"></script>
+
+<!-- Bootstrap Bundle js -->
+<script src="assets/plugins/bootstrap/js/popper.min.js"></script>
+<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- Moment js -->
+<script src="assets/plugins/moment/moment.js"></script>
+
+<!-- P-scroll js -->
+<script src="assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="assets/plugins/perfect-scrollbar/p-scroll.js"></script>
+
+<!-- Sticky js -->
+<script src="assets/js/sticky.js"></script>
+
+<!-- eva-icons js -->
+<script src="assets/js/eva-icons.min.js"></script>
+
+<!-- DATA TABLE JS-->
+<script src="assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
+<script src="assets/plugins/datatable/js/dataTables.bootstrap5.js"></script>
+<script src="assets/plugins/datatable/dataTables.responsive.min.js"></script>
+<script src="assets/plugins/datatable/responsive.bootstrap5.min.js"></script>
+
+<!--Bootstrap-datepicker js-->
+<script src="assets/plugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+
+<!-- Internal Select2 js-->
+<script src="assets/plugins/select2/js/select2.min.js"></script>
+
+<!--Internal Sumoselect js-->
+<script src="assets/plugins/sumoselect/jquery.sumoselect.js"></script>
+
+<!-- Sidebar js -->
+<script src="assets/plugins/side-menu/sidemenu.js"></script>
+
+<!-- Right-sidebar js -->
+<script src="assets/plugins/sidebar/sidebar.js"></script>
+<script src="assets/plugins/sidebar/sidebar-custom.js"></script>
+
+<!--themecolor js-->
+<script src="assets/js/themecolor.js"></script>
+
+<!--Internal  Form-elements js-->
+<script src="assets/js/advanced-form-elements.js"></script>
+<script src="assets/js/select2.js"></script>
+
+<!-- Internal Form-validation js -->
+<script src="assets/js/jquery.validate.min.js"></script>
+
+<!-- Sweet-alert js  -->
+<script src="assets/plugins/sweet-alert/sweetalert2.all.min.js"></script>
+
+<!-- custom js -->
+<script src="assets/js/toastr.min.js"></script>
+<script src="assets/js/custom.js"></script>
+
+<% if(message) { %>
+<input type="hidden" id="alert-filter" value="<%= message.info %>" />
+<% } else { %>
+<input type="hidden" id="alert-filter" value="" />
+<% } %>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		
+		<% if(message) { %>
+			var infomessage = document.getElementById("alert-filter").value;
+		    <% if(message.status == 'success') { %>
+		        toastr.success(infomessage, 'Success'); 
+		    <% } %>
+
+		    <% if(message.status == 'error') { %>
+		        toastr.error(infomessage, 'Error');   
+		    <% } %>
+		<% } %>
+
+		var pathname = window.location.pathname;
+		$('.side-menu a[href="'+pathname+'"]').addClass('active');
+		$('.side-menu a[href="'+pathname+'"]').parent("li").parent("ul").parent("li").addClass('is-expanded');
+
+	});
+	$('.datepicker').bootstrapdatepicker({
+		format: "yyyy-mm-dd",
+		viewMode: "date",
+		multidate: false,
+		autoclose: true,
+		todayHighlight: true
+	})
+</script>

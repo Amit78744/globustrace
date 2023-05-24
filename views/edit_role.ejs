@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+	<head>
+		<title><%= title %></title>
+	    <%- include('inc/head.ejs') -%>
+	</head>
+
+	<body class="ltr main-body app sidebar-mini">
+
+		<!-- Loader -->
+		<div id="global-loader">
+			<img src="assets/img/loader.svg" class="loader-img" alt="Loader">
+		</div>
+		<!-- /Loader -->
+
+		<!-- Page -->
+		<div class="page">
+			<div>
+				<!-- main-header -->
+				<div class="main-header side-header sticky nav nav-item">
+					<div class="container-fluid main-container ">
+						<div class="main-header-left ">
+							<div class="responsive-logo">
+								<%- include('inc/responsive_logo.ejs') -%>
+							</div>
+							<div class="app-sidebar__toggle" data-bs-toggle="sidebar">
+								<a class="open-toggle" href="javascript:void(0);"><i class="header-icon fe fe-align-left" ></i></a>
+								<a class="close-toggle" href="javascript:void(0);"><i class="header-icons fe fe-x"></i></a>
+							</div>
+							<div class="main-header-center ms-3 d-sm-none d-md-none d-lg-block">
+								<h4 class="content-title mb-0 my-auto"><%= title %></h4>
+							</div>
+						</div>
+						<div class="main-header-right">
+							<button class="navbar-toggler navresponsive-toggler d-lg-none ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
+								<span class="navbar-toggler-icon fe fe-more-vertical "></span>
+							</button>
+							<div class="mb-0 navbar navbar-expand-lg navbar-nav-right responsive-navbar navbar-dark p-0">
+								<div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+									<%- include('inc/header.ejs') -%>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /main-header -->
+
+				<!-- main-sidebar -->
+				<div class="app-sidebar__overlay" data-bs-toggle="sidebar"></div>
+				<div class="sticky">
+					<%- include('inc/sidebar.ejs') -%>
+				</div>
+				<!-- main-sidebar -->
+			</div>
+
+			<!-- main-content -->
+			<div class="main-content app-content">
+
+				<!-- container -->
+				<div class="main-container container-fluid">
+
+					<div class="breadcrumb-header justify-content-between"></div>
+
+					<div class="row ">
+						<div class="col-lg-12">
+							<div class="card">
+								<div class="card-body">
+									<form action="<%= prefix %>/updateRole" method="POST" id="roleForm">
+										<input type="hidden" name="roleId" value="<%= data.roleId %>">
+										<div class="row">
+											<div class="col-lg-12">
+												<div class="form-group">
+													<label>Role name</label>
+													<input type="text" name="name" class="form-control" placeholder="Role name" value="<%= data.roleName %>">
+												</div>
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="col-lg-12">
+												<ul type="none" class="ps-0">
+													<li><b>Note:</b></li>
+													<li>View - The user can only view the details. He/She won't be able to make any changes, import or export the files.</li>
+													<li>Create/Delete - The user will be able to Create, Update, Delete, Import and Export the details.</li>
+												</ul>
+											</div>
+										</div>
+
+										<br><h5>Account Managements</h5><hr>
+
+										<div class="row accessRoles">
+											<div class="col-lg-3">
+												<div class="form-group">
+													<label><b>Globustrace Admin Users</b></label>
+													<label class="ckbox">
+														<input type="checkbox" name="roles[]" value="viewUsers" <%= data.roles.includes("viewUsers") ? 'checked' : '' %>><span>View</span>
+													</label>
+													<label class="ckbox">
+														<input type="checkbox" name="roles[]" value="createUsers" <%= data.roles.includes("createUsers") ? 'checked' : '' %>><span>Create/Delete</span>
+													</label>
+												</div>
+											</div>
+											<% if(data.roleId == 1) { %>
+											<div class="col-lg-3 d-none">
+												<div class="form-group">
+													<label><b>Roles</b></label>
+													<label class="ckbox">
+														<input type="checkbox" name="roles[]" value="viewRoles" <%= data.roles.includes("viewRoles") ? 'checked' : '' %>><span>View</span>
+													</label>
+													<label class="ckbox">
+														<input type="checkbox" name="roles[]" value="createRoles" <%= data.roles.includes("createRoles") ? 'checked' : '' %>><span>Create/Delete</span>
+													</label>
+												</div>
+											</div>
+											<% } %>
+
+											<div class="col-lg-3">
+												<div class="form-group">
+													<label><b>Globustrace App Users</b></label>
+													<label class="ckbox">
+														<input type="checkbox" name="roles[]" value="viewClients" <%= data.roles.includes("viewClients") ? 'checked' : '' %>><span>View</span>
+													</label>
+													<!-- <label class="ckbox">
+														<input type="checkbox" name="roles[]" value="createClients" <%= data.roles.includes("createClients") ? 'checked' : '' %>><span>Create/Delete</span>
+													</label> -->
+												</div>
+											</div>
+
+										</div>
+
+										<br><h5>Device Managements</h5><hr>
+
+										<div class="row accessRoles">
+											<div class="col-lg-3">
+												<div class="form-group">
+													<label><b>Devices</b></label>
+
+													<label class="ckbox">
+														<input type="checkbox" name="roles[]" value="viewDevices" <%= data.roles.includes("viewDevices") ? 'checked' : '' %>><span>View</span>
+													</label>
+													<label class="ckbox">
+														<input type="checkbox" name="roles[]" value="createDevices" <%= data.roles.includes("createDevices") ? 'checked' : '' %>><span>Create/Delete</span>
+													</label>
+													<label class="ckbox">
+														<input type="checkbox" name="roles[]" value="downloadDevices" <%= data.roles.includes("downloadDevices") ? 'checked' : '' %>><span>Download</span>
+													</label>
+												</div>
+											</div>
+										</div>
+
+										<br><h5>System</h5><hr>
+
+										<div class="row accessRoles">
+											<div class="col-lg-3">
+												<div class="form-group">
+													<label><b>Email Management</b></label>
+													<label class="ckbox">
+														<input type="checkbox" name="roles[]" value="viewNotifications" <%= data.roles.includes("viewNotifications") ? 'checked' : '' %>><span>View</span>
+													</label>
+													<label class="ckbox">
+														<input type="checkbox" name="roles[]" value="sendNotifications" <%= data.roles.includes("sendNotifications") ? 'checked' : '' %>><span>Send</span>
+													</label>
+													<label class="ckbox">
+														<input type="checkbox" name="roles[]" value="downloadNotifications" <%= data.roles.includes("downloadNotifications") ? 'checked' : '' %>><span>Download</span>
+													</label>
+												</div>
+											</div>
+
+											<div class="col-lg-3">
+												<div class="form-group">
+													<label><b>Settings</b></label>
+													<label class="ckbox">
+														<input type="checkbox" name="roles[]" value="viewSettings" <%= data.roles.includes("viewSettings") ? 'checked' : '' %>><span>View</span>
+													</label>
+													<label class="ckbox">
+														<input type="checkbox" name="roles[]" value="downloadSettings" <%= data.roles.includes("downloadSettings") ? 'checked' : '' %>><span>Download</span>
+													</label>
+													<label class="ckbox">
+														<input type="checkbox" name="roles[]" value="updateSettings" <%= data.roles.includes("updateSettings") ? 'checked' : '' %>><span>Update</span>
+													</label>
+												</div>
+											</div>
+
+										</div>
+										
+										<hr>
+
+										<div class="row accessRoles mt-3">
+											<div class="col-lg-6">
+												<div class="form-group">
+													<label class="ckbox">
+														<input type="checkbox" id="checkedAll" onClick="check_uncheck_checkbox(this.checked);"><span class="checkall">Check All</span>
+													</label>
+												</div>
+											</div>
+
+											<div class="col-lg-6">
+												<div class="form-group float-end">
+													<input type="submit" class="btn btn-primary" value="Update">
+													<a href="<%= prefix %>/roles" class="btn btn-danger">Cancel</a>
+												</div>
+											</div>
+										</div>
+
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<!-- Container closed -->
+			</div>
+			<!-- main-content closed -->
+
+			<!-- Footer opened -->
+			<div class="main-footer ht-45">
+				<%- include('inc/footer.ejs') -%>
+			</div>
+			<!-- Footer closed -->
+
+		</div>
+		<!-- End Page -->
+
+		<%- include('inc/script.ejs') -%>
+		<script type="text/javascript">
+
+			$('#roleForm').validate({
+                rules: {
+                    name: { required: true }
+                }
+            })
+
+			function check_uncheck_checkbox(isChecked) {
+
+				if(isChecked) {
+					$("input:checkbox").prop('checked', true);
+					$('.checkall').html('Uncheck All');
+				} else {
+					$("input:checkbox").prop('checked', false);
+					$('.checkall').html('Check All');
+				}
+			}
+		</script>
+	</body>
+</html>

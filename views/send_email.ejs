@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+	<head>
+		<title><%= title %></title>
+	    <%- include('inc/head.ejs') -%>
+	</head>
+
+	<body class="ltr main-body app sidebar-mini">
+
+		<!-- Loader -->
+		<div id="global-loader">
+			<img src="assets/img/loader.svg" class="loader-img" alt="Loader">
+		</div>
+		<!-- /Loader -->
+
+		<!-- Page -->
+		<div class="page">
+			<div>
+				<!-- main-header -->
+				<div class="main-header side-header sticky nav nav-item">
+					<div class="container-fluid main-container ">
+						<div class="main-header-left ">
+							<div class="responsive-logo">
+								<%- include('inc/responsive_logo.ejs') -%>
+							</div>
+							<div class="app-sidebar__toggle" data-bs-toggle="sidebar">
+								<a class="open-toggle" href="javascript:void(0);"><i class="header-icon fe fe-align-left" ></i></a>
+								<a class="close-toggle" href="javascript:void(0);"><i class="header-icons fe fe-x"></i></a>
+							</div>
+							<div class="main-header-center ms-3 d-sm-none d-md-none d-lg-block">
+								<h4 class="content-title mb-0 my-auto"><%= title %></h4>
+							</div>
+						</div>
+						<div class="main-header-right">
+							<button class="navbar-toggler navresponsive-toggler d-lg-none ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
+								<span class="navbar-toggler-icon fe fe-more-vertical "></span>
+							</button>
+							<div class="mb-0 navbar navbar-expand-lg navbar-nav-right responsive-navbar navbar-dark p-0">
+								<div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+									<%- include('inc/header.ejs') -%>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /main-header -->
+
+				<!-- main-sidebar -->
+				<div class="app-sidebar__overlay" data-bs-toggle="sidebar"></div>
+				<div class="sticky">
+					<%- include('inc/sidebar.ejs') -%>
+				</div>
+				<!-- main-sidebar -->
+			</div>
+
+			<!-- main-content -->
+			<div class="main-content app-content">
+
+				<!-- container -->
+				<div class="main-container container-fluid">
+
+					<div class="breadcrumb-header justify-content-between"></div>
+
+					<div class="row ">
+						<div class="col-lg-12">
+							<div class="card">
+								<div class="card-body">
+									<form action="<%= prefix %>/sendEmailNotification" method="POST" id="roleForm">
+										<div class="row">
+											<!-- <div class="col-lg-2">
+												<div class="form-group">
+													<label>Subscriber type</label>
+													<select name="type" id="type" class="form-control select2" onchange="getFilteredEmail();">
+														<option value="all">All</option>
+														<option>Individual</option>
+														<option>Company</option>
+													</select>
+												</div>
+											</div> -->
+
+											<!-- <div class="col-lg-2">
+												<div class="form-group">
+													<label>Product</label>
+													<select name="product[]" id="product" multiple="multiple" class="form-control product_selectsum2" onchange="getFilteredEmail();">
+														<option value="TAM_Sports">TAM Sports</option>
+														<option value="EIKONA">EIKONA</option>
+														<option value="RMS">RMS</option>
+														<option value="ADEX">ADEX</option>
+													</select>
+												</div>
+											</div> -->
+
+											<div class="col-lg-5">
+												<div class="form-group">
+													<label>Account Status</label>
+													<select name="accountStatus" id="accountStatus" class="form-control select2" onchange="getFilteredEmail();">
+														<option value="all">All</option>
+														<option value="1">Active</option>
+														<option value="0">Inactive</option>
+													</select>
+												</div>
+											</div>
+
+											<div class="col-lg-5">
+												<div class="form-group">
+													<label>Users</label>
+													<div class="emailSelect">
+														<select name="email[]" id="email" class="form-control selectsum2" multiple="multiple">
+															<% data.emails.forEach(function(row,index){ %>
+															<option value="<%= row.email %>"><%= row.name %> (<%= row.email %>)</option>
+															<% }) %>
+														</select>
+													</div>
+												</div>
+											</div>
+
+											<!-- <div class="col-lg-2">
+												<div class="form-group">
+													<label>Payment Status</label>
+													<select name="paymentStatus[]" id="paymentStatus" class="form-control status_selectsum2" multiple="multiple" onchange="getFilteredEmail();">
+														<option value="Pending">Pending</option>
+														<option value="SO Created">SO Created</option>
+														<option value="Payment Received">Payment Received</option>
+														<option value="Renewal">Renewal</option>
+														<option value="Upgrade">Upgrade</option>
+														<option value="Cancelled">Cancelled</option>
+														<option value="Expired">Expired</option>
+													</select>
+												</div>
+											</div> -->
+											<div class="col-lg-2">
+												<div class="form-group">
+													<br>
+													<button type="button" id="clearFilter" class="btn btn-primary mt-2" style="padding: 0.3rem 1rem;">Clear</button>
+												</div>
+											</div>
+
+											<div class="col-lg-12">
+												<div class="form-group">
+													<label>Subject</label>
+													<input type="text" name="subject" class="form-control" placeholder="Subject" value="">
+												</div>
+											</div>
+
+											<div class="col-lg-12">
+												<div class="form-group">
+													<label>Message</label>
+													<textarea name="message" class="form-control" placeholder="Message" rows="10"></textarea>
+												</div>
+											</div>
+										</div>
+
+										<div class="row mt-3">
+											<div class="col-lg-6">
+												<div class="form-group">
+													<input type="submit" class="btn btn-primary" value="Send">
+													<a href="<%= prefix %>/emailManagement" class="btn btn-danger">Cancel</a>
+												</div>
+											</div>
+										</div>
+
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<!-- Container closed -->
+			</div>
+			<!-- main-content closed -->
+
+			<!-- Footer opened -->
+			<div class="main-footer ht-45">
+				<%- include('inc/footer.ejs') -%>
+			</div>
+			<!-- Footer closed -->
+
+		</div>
+		<!-- End Page -->
+
+		<%- include('inc/script.ejs') -%>
+		<script type="text/javascript">
+			$('.product_selectsum2').SumoSelect({ selectAll: true, search: true, placeholder: 'Select product' });
+			$('.status_selectsum2').SumoSelect({ selectAll: true, search: true, placeholder: 'Select status' });
+
+			$('#roleForm').validate({
+                rules: {
+                   	'email[]': { required: true },
+                   	subject: { required: true },
+                    message: { required: true }
+                },
+                errorPlacement: function (error, element) {
+                	switch (element.attr("name")) {
+                		case 'email[]':
+				            error.insertAfter($(".emailSelect"));
+				            break;
+				        default:
+            				error.insertAfter(element);
+                	}
+                }
+            })
+
+            function getFilteredEmail() {
+            	var accountStatus = $('#accountStatus').val();
+            	
+            	$.ajax({
+                    url : "<%= prefix %>/getFilteredEmail",
+                    type : "POST",
+                    data : { 'accountStatus': accountStatus},
+                    success : function(data){
+                    	console.log(data.options)
+                        $('#email').html(data.options)
+                        $('#email')[0].sumo.reload();
+                    }
+                });
+           	}
+
+           	$('#clearFilter').click(function(){
+           		$('.select2').val('all').trigger('change');
+           		$('.product_selectsum2')[0].sumo.unSelectAll();
+           		$('.status_selectsum2')[0].sumo.unSelectAll();
+           	})
+		</script>
+	</body>
+</html>

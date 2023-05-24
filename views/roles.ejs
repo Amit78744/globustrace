@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+	<head>
+		<title><%= title %></title>
+	    <%- include('inc/head.ejs') -%>
+	</head>
+
+	<body class="ltr main-body app sidebar-mini">
+
+		<!-- Loader -->
+		<div id="global-loader">
+			<img src="assets/img/loader.svg" class="loader-img" alt="Loader">
+		</div>
+		<!-- /Loader -->
+
+		<!-- Page -->
+		<div class="page">
+			<div>
+				<!-- main-header -->
+				<div class="main-header side-header sticky nav nav-item">
+					<div class="container-fluid main-container ">
+						<div class="main-header-left ">
+							<div class="responsive-logo">
+								<%- include('inc/responsive_logo.ejs') -%>
+							</div>
+							<div class="app-sidebar__toggle" data-bs-toggle="sidebar">
+								<a class="open-toggle" href="javascript:void(0);"><i class="header-icon fe fe-align-left" ></i></a>
+								<a class="close-toggle" href="javascript:void(0);"><i class="header-icons fe fe-x"></i></a>
+							</div>
+							<div class="main-header-center ms-3 d-sm-none d-md-none d-lg-block">
+								<h4 class="content-title mb-0 my-auto"><%= title %></h4>
+							</div>
+						</div>
+						<div class="main-header-right">
+							<button class="navbar-toggler navresponsive-toggler d-lg-none ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
+								<span class="navbar-toggler-icon fe fe-more-vertical "></span>
+							</button>
+							<div class="mb-0 navbar navbar-expand-lg navbar-nav-right responsive-navbar navbar-dark p-0">
+								<div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+									<%- include('inc/header.ejs') -%>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /main-header -->
+
+				<!-- main-sidebar -->
+				<div class="app-sidebar__overlay" data-bs-toggle="sidebar"></div>
+				<div class="sticky">
+					<%- include('inc/sidebar.ejs') -%>
+				</div>
+				<!-- main-sidebar -->
+			</div>
+
+			<!-- main-content -->
+			<div class="main-content app-content">
+
+				<!-- container -->
+				<div class="main-container container-fluid">
+
+					<div class="breadcrumb-header justify-content-between"></div>
+
+					<!-- row -->
+					<div class="row ">
+						<div class="col-lg-12">
+							<div class="card">
+								
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table border-top-0 table-bordered text-nowrap border-bottom" id="roles-datatable">
+											<thead>
+												<tr>
+													<th class="wd-15p border-bottom-0">Role</th>
+													<th class="wd-15p border-bottom-0">Account managements</th>
+													<th class="wd-15p border-bottom-0">Device managements</th>
+                                                    <th class="wd-15p border-bottom-0">System</th>
+													<th class="wd-15p border-bottom-0">Actions</th>
+												</tr>
+											</thead>
+											<tbody>
+												
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- row closed -->
+				</div>
+				<!-- Container closed -->
+			</div>
+			<!-- main-content closed -->
+
+			<!-- Footer opened -->
+			<div class="main-footer ht-45">
+				<%- include('inc/footer.ejs') -%>
+			</div>
+			<!-- Footer closed -->
+
+		</div>
+		<!-- End Page -->
+
+		<%- include('inc/script.ejs') -%>
+		<script type="text/javascript">
+			var createButton = "";
+			<% if(session.roles.includes('createRoles')) { %>
+				createButton = '<a href="<%= prefix %>/createRole" class="btn btn-primary me-2">Create Role</a>'
+				createButton += '<a href="<%= prefix %>/exportRole" style="color: #A60062;" class="btn btn-outline-dark">Export</a>'
+			<% } %>
+			var dataTable = $('#roles-datatable').DataTable({
+                responsive: false,
+                searching: false,
+                processing: true,
+                serverSide: true,
+                paging: true,
+                ajax: {
+                    url: "<%= prefix %>/getRoles",
+                    type: "POST",
+                    data: function ( data ) {
+                        data.keyword = $('#keyword').val();
+                    }
+                },
+                columnDefs: [
+                  {
+                    orderable: false,
+                    targets: 0,
+                  }
+                ],
+                oLanguage: {
+                  sLengthMenu: "_MENU_",
+                  sSearch: "",
+                },
+                aLengthMenu: [[10, 50, 100], [10, 50, 100]],
+                select: {
+                  style: "multi"
+                },
+                dom: '<"top"l>rt<"bottom"ip><"clear">',
+                order: [],
+                bInfo: true,
+                pageLength: 10,
+                buttons: [],
+                language: { "infoFiltered": "" },
+                columns: [
+                    {"data": "role"},
+                    {"data": "account"},
+                    {"data": "device"},
+                    {"data": "system"},
+                    {"data": "action"}
+                ],
+                initComplete: function(){
+				    $("div.top").append(createButton);           
+				} 
+            });
+
+            $('#btnSearch').click(function(){ //button filter event click
+                dataTable.ajax.reload();  //just reload table
+            });
+
+            $('#btnReset').click(function(){ //button reset event click
+                $('#form-filter')[0].reset();
+                dataTable.ajax.reload();  //just reload table
+            });
+
+            function deleteRole(id){
+                Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085D6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, delete it!',
+                        confirmButtonClass: 'btn btn-primary',
+                        cancelButtonClass: 'btn btn-danger ms-1',
+                        buttonsStyling: false,
+                }).then(function (result) {
+                    if (result.value) {
+                        $.ajax({
+                            url : "<%= prefix %>/deleteRole",
+                            type : "POST",
+                            data : { 'id' : id, },
+                            success : function(data){
+                                window.location.reload(true);
+                            }
+                        });
+                    }
+                });
+            }
+		</script>
+	</body>
+</html>

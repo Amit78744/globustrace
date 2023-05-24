@@ -1,0 +1,332 @@
+.error{
+  color: #FF4644 !important;
+}
+.success{
+  color: #00875A;
+}
+.side-menu .side-menu__icon {
+	line-height: 20px;
+}
+.SumoSelect > .CaptionCont{
+	border-radius: 3px;
+	height: 35px;
+}
+.btn-filter{
+	min-width: 100px;
+  margin-top: 5px;
+  margin-right: 5px;
+}
+.card-header{
+  padding-bottom: 0px;
+}
+.card-title{
+  display: inline-block;
+}
+.page-item:first-child .page-link {
+  width: 80px;
+}
+.breadcrumb-header{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.datepicker { 
+    z-index: 99999 !important;
+}
+.select2-container .select2-selection--single{
+  height: 35px;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  line-height: 35px;
+}
+.btn-icon-list .btn-icon{
+  width: 30px;
+  height: 30px;
+}
+.btn-icon-list a{
+  display: inline-block !important;
+}
+.accessRoles .ckbox{
+  margin-bottom: 10px;
+}
+.form-control{
+  color: #4d5875;
+}
+.status-dropdown{
+  width: 120px;
+}
+.bottom-space{
+  margin-bottom: 70px;
+}
+.card-body {
+    padding: 1rem 1rem !important;
+}
+#form-filter .form-group{
+  margin-bottom: 0px;
+}
+.table th, .table td {
+    padding: 3px 15px;
+    vertical-align: middle;
+}
+.dataTables_wrapper .dataTables_length label{
+  margin-bottom: 5px;
+}
+.table-responsive .top .dataTables_length{
+  float: right;
+}
+.table-responsive .top .btn{
+  padding: 5px 20px;
+  line-height: 1.538;
+}
+.table-responsive .topUser .btn{
+  padding: 5px 20px;
+  line-height: 1.538;
+}
+.dataTables_wrapper .dataTables_info{
+  margin-top: 15px !important;
+}
+.dataTables_wrapper .dataTables_paginate {
+    margin-top: 5px !important;
+}
+#accordion .panel-title1 a{
+  color: #A60062;
+  padding: 0px;
+}
+#accordion .panel-heading1 a.collapsed::before {
+  content: "\e92d";
+  top: -3px;
+}
+#accordion .panel-heading1 a::before {
+  content: "\e930";
+  top: -3px;
+}
+form hr {
+  margin-top: 0;
+  margin-bottom: 6px;
+}
+.font-size-20{
+  font-size: 20px;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+  background-color: #0162e8;
+  border: 1px solid #0162e8;
+  padding: 2px 15px;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+  color: #fff;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+  font-size: 15px;
+  top: 2px;
+  left: 3px;
+}
+.page-link {
+  width: inherit;
+  height: inherit;
+}
+div.dataTables_wrapper div.dataTables_processing{
+  z-index: 99999;
+}
+/*.wizard .table th, .table td {
+  padding: 0.75rem;
+}*/
+
+#subscriptions-datatable td.details-control:first-child {
+  background: url('https://datatables.net/examples/resources/details_open.png') no-repeat center center;
+  cursor: pointer;
+}
+
+#subscriptions-datatable tr.shown td.details-control:first-child {
+  background: url('https://datatables.net/examples/resources/details_close.png') no-repeat center center;
+}
+
+#creative-datatable td.details-control:first-child {
+  background: url('https://datatables.net/examples/resources/details_open.png') no-repeat center center;
+  cursor: pointer;
+}
+
+#creative-datatable tr.shown td.details-control:first-child {
+  background: url('https://datatables.net/examples/resources/details_close.png') no-repeat center center;
+}
+.card-title{
+  margin-bottom: 0px;
+}
+.table .badge{
+  width: 100px;
+}
+.tabs-style-3 .tabs-menu-body {
+    margin-top: 0px;
+    border: none;
+}
+.tabs-style-3 .panel-tabs li a{
+  background: #949eb7 !important;
+  color: #fff !important;
+}
+.tabs-style-3 .panel-tabs li{
+  min-width: 180px;
+}
+.tabs-style-3 .nav.panel-tabs li a {
+  padding: 10px 10px 10px 10px;
+}
+.tabs-style-3 .panel-tabs{
+  padding: 0px 12px;
+}
+#wizard1 .wizard-title{
+  font-size: 15px;
+  font-weight: bold;
+}
+.wizard > .actions {
+    position: relative;
+    display: block;
+    text-align: right;
+    width: 100%;
+}
+.wizard > .actions > ul {
+  display: inline-block;
+}
+.wizard ul > li, .tabcontrol ul > li {
+    display: inline-block;
+    padding: 0;
+}
+.wizard > .actions > ul > li:last-child a {
+    background-color: #0162e8;
+}
+.wizard > .actions.clearfix ul li:empty {
+  margin: 0;
+}
+.extra-small-btn{
+  padding: 5px 5px;
+  width: 20px;
+  height: 20px;
+}
+
+.small-padd{
+  padding-right: 0.25rem;
+  padding-left: 0.25rem;
+}
+
+.multi-select2-disabled .select2-container {
+  pointer-events: none;
+  touch-action: none;
+}
+.multi-select2-disabled .select2-container .select2-selection__choice__remove {
+  display: none;
+}
+.multi-select2-disabled .select2-container .select2-selection {
+  background: #ecf0fa;
+}
+input[readonly] {
+    background-color: #ecf0fa;
+}
+#loadingMessage{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  top: -5px;
+  right: 105%; 
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  left: 100%; /* To the right of the tooltip */
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent transparent black;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.subscription-status-dropdown {
+    width: 125px;
+}
+.SumoSelect > .CaptionCont > span.placeholder {
+    color: #737f9e;
+}
+.SumoSelect .placeholder {
+    background-color: #fff;
+    opacity: 1;
+}
+.SumoSelect > .CaptionCont {
+  line-height: 25px;
+}
+
+#togglePassword {
+  position: absolute;
+  right: 20px;
+  top: 40px;
+  cursor: pointer;
+  z-index: 99999;
+}
+#toggleConfirmPassword {
+  position: absolute;
+  right: 20px;
+  top: 40px;
+  cursor: pointer;
+  z-index: 99999;
+}
+.orderDetailsBtn{
+  position: absolute;
+  right: 95px;
+  top: 5px;
+  padding: 6px 20px;
+}
+
+.btn-back{
+  padding: 6px 20px;
+}
+.dropdown-toggle:disabled::after{
+  display: none;
+}
+/*========================================================
+        TOAST
+=========================================================*/
+#toast-container > div {
+  opacity : 0.9;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=90);
+  filter : alpha(opacity=90);
+  max-width : none;
+}
+#toast-container > div:hover {
+  box-shadow : 2px 2px 10px 0 rgba(0, 0, 0, 0.75);
+}
+.toast {
+  background-color : #1A0355;
+}
+.toast-success {
+  background-color : #00875A;
+}
+.toast-error {
+  background-color : #FF4644;
+}
+.toast-info {
+  background-color : #00CFE8;
+}
+.toast-warning {
+  background-color : #F38530;
+}

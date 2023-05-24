@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+	<head>
+		<title><%= title %></title>
+	    <%- include('inc/head.ejs') -%>
+	</head>
+
+	<body class="ltr main-body app sidebar-mini">
+
+		<!-- Create Device Modal -->
+		<div class="modal fade" id="createDeviceModel" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content modal-content-demo">
+					<form action="" method="POST" enctype="multipart/form-data" id="importForm">
+						<div class="modal-header">
+							<h6 class="modal-title">Create device</h6>
+						</div>
+						<div class="modal-body">
+
+							<form action="<%= prefix %>/saveDevice" method="POST" id="roleForm">
+								<div class="form-group">
+									<label>Device Id</label>
+									<!-- <input type="text" name="deviceId" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" class="form-control" placeholder="Device Id"> -->
+									<input type="text" name="deviceId" id="deviceId" class="form-control" placeholder="Device Id" required>
+									<span id="device_errormessage">Please enter device id.</span>
+								</div>
+
+							</form>
+
+							<div class="success-message"></div>
+							<div class="error-message"></div>
+							
+						</div>
+						<div class="modal-footer">
+							<button class="btn btn-primary" type="submit" onclick="saveDevice()">Create Device</button>
+							<button class="btn btn-danger" data-bs-dismiss="modal" type="button">Close</button>
+							<!-- <button class="btn ripple btn-primary btnImport" type="button"><span class="spinner-border spinner-border-sm d-none" role="status"	aria-hidden="true"></span> Import</button>
+							<button class="btn ripple btn-secondary btnClose" data-bs-dismiss="modal" type="button">Close</button> -->
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<!-- Update Device Modal -->
+		<div class="modal fade" id="editDeviceModel" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content modal-content-demo">
+					<form action="" method="POST" enctype="multipart/form-data" id="importForm">
+						<div class="modal-header">
+							<h6 class="modal-title">Update device</h6>
+						</div>
+						<div class="modal-body">
+
+							<form action="<%= prefix %>/updateDevice" method="POST" id="updateDeviceForm">
+								<div class="form-group">
+
+									<input type="hidden" name="edit_Id" id="edit_Id">
+
+									<label>Device Id</label>
+									<!-- <input type="text" name="deviceId" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" class="form-control" placeholder="Device Id"> -->
+									<input type="text" name="edit_deviceId" id="edit_deviceId" class="form-control" placeholder="Device Id" required>
+									<span id="edit_device_errormessage">Please enter device id.</span>
+								</div>
+
+							</form>
+
+							<div class="success-message"></div>
+							<div class="error-message"></div>
+							
+						</div>
+						<div class="modal-footer">
+							<button class="btn btn-primary" type="submit" onclick="updateDevice()">Update Device</button>
+							<button class="btn btn-danger" data-bs-dismiss="modal" type="button">Close</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<!-- Import Device Modal -->
+		<div class="modal fade" id="importDeviceModel" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content modal-content-demo">
+					<form action="<%= prefix %>/importDevice" method="POST" enctype="multipart/form-data" id="importForm">
+						<div class="modal-header">
+							<h6 class="modal-title">Import devices</h6>
+						</div>
+						<div class="modal-body">
+
+								<div class="form-group">
+									<label>Device File</label>
+									<input type="file" name="deviceFile" id="deviceFile" class="form-control" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" required>
+
+									<span id="device_errormessage">Please enter device id.</span>
+								</div>
+
+							<div class="success-message"></div>
+							<div class="error-message"></div>
+							
+						</div>
+						<div class="modal-footer">
+							<button class="btn btn-primary" type="submit">Import Devices</button>
+							<button class="btn btn-danger" data-bs-dismiss="modal" type="button">Close</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<!-- Loader -->
+		<div id="global-loader">
+			<img src="assets/img/loader.svg" class="loader-img" alt="Loader">
+		</div>
+		<!-- /Loader -->
+
+		<!-- Page -->
+		<div class="page">
+			<div>
+				<!-- main-header -->
+				<div class="main-header side-header sticky nav nav-item">
+					<div class="container-fluid main-container ">
+						<div class="main-header-left ">
+							<div class="responsive-logo">
+								<a href="index.html" class="header-logo">
+									<img src="assets/img/brand/logo.png" class="logo-1" alt="logo">
+									<img src="assets/img/brand/logo-white.png" class="dark-logo-1" alt="logo">
+								</a>
+							</div>
+							<div class="app-sidebar__toggle" data-bs-toggle="sidebar">
+								<a class="open-toggle" href="javascript:void(0);"><i class="header-icon fe fe-align-left" ></i></a>
+								<a class="close-toggle" href="javascript:void(0);"><i class="header-icons fe fe-x"></i></a>
+							</div>
+							<div class="main-header-center ms-3 d-sm-none d-md-none d-lg-block">
+								<h4 class="content-title mb-0 my-auto"><%= title %></h4>
+							</div>
+						</div>
+						<div class="main-header-right">
+							<button class="navbar-toggler navresponsive-toggler d-lg-none ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
+								<span class="navbar-toggler-icon fe fe-more-vertical "></span>
+							</button>
+							<div class="mb-0 navbar navbar-expand-lg navbar-nav-right responsive-navbar navbar-dark p-0">
+								<div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+									<%- include('inc/header.ejs') -%>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /main-header -->
+
+				<!-- main-sidebar -->
+				<div class="app-sidebar__overlay" data-bs-toggle="sidebar"></div>
+				<div class="sticky">
+					<%- include('inc/sidebar.ejs') -%>
+				</div>
+				<!-- main-sidebar -->
+			</div>
+
+			<!-- main-content -->
+			<div class="main-content app-content">
+
+				<!-- container -->
+				<div class="main-container container-fluid">
+
+					<div class="breadcrumb-header justify-content-between"></div>
+
+					<div class="row ">
+						<div class="col-lg-12">
+							<div class="card" id="accordion">
+								<!-- <div class="card-header">
+									<h3 class="card-title">Filters</h3>
+									<% if(session.roles.includes('createUsers')) { %>
+									<a href="<%= prefix %>/createUser" class="btn btn-primary float-end">Create TAM User</a>
+									<% } %>
+								</div> -->
+								<div class="card-body">
+									<div class="panel-heading1">
+										<h4 class="panel-title1">
+											<a class="accordion-toggle collapsed" data-bs-toggle="collapse"
+												data-bs-parent="#accordion11" href="#form-filter"
+												aria-expanded="false">Filter</a>
+										</h4>
+									</div>
+									<form id="form-filter" class="panel-collapse collapse mt-2">
+										<div class="row">
+											<div class="col-lg-3">
+												<div class="form-group">
+													<label>Device Id</label>
+													<input type="text" class="form-control" id="keyword" placeholder="Device Id">
+												</div>
+											</div>
+											
+											<div class="col-lg-3">
+												<div class="mt-4"></div>
+												<button type="button" class="btn btn-primary btn-filter btn-rounded" id="btnSearch">Search</button>
+												<button type="button" class="btn btn-outline-dark btn-filter btn-rounded" style="color: #A60062;" id="btnReset">Reset</button>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- row -->
+					<div class="row ">
+						<div class="col-lg-12">
+							<div class="card">
+								
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table border-top-0 table-bordered text-nowrap border-bottom" id="devices-datatable">
+											<thead>
+												<tr>
+													<th class="wd-15p border-bottom-0">No</th>
+													<th class="wd-20p border-bottom-0">Device Id</th>
+													<th class="wd-20p border-bottom-0">Status</th>
+													<th class="wd-20p border-bottom-0">Linked User</th>
+													<th class="wd-10p border-bottom-0">Action</th>
+												</tr>
+											</thead>
+											<tbody>
+																								
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- row closed -->
+				</div>
+				<!-- Container closed -->
+			</div>
+			<!-- main-content closed -->
+
+			<!-- Footer opened -->
+			<div class="main-footer ht-45">
+				<%- include('inc/footer.ejs') -%>
+			</div>
+			<!-- Footer closed -->
+
+		</div>
+		<!-- End Page -->
+
+		<%- include('inc/script.ejs') -%>
+		<script type="text/javascript">
+
+            <% if(session.roles.includes('createDevices')) { %>
+				createButton = '<button type="button" class="btn btn-primary me-2 createDevice" id="createDevice">Create Device</button>'
+				importButton = '<button type="button" class="btn btn-primary me-2 importDevice" id="importDevice">Import Devices</button>'
+			<% } %>
+
+			<% if(session.roles.includes('downloadDevices')) { %>
+				downloadButton = '<a href="exportDevice" class="btn btn-primary me-2 download">Download Sample File</a>'
+			<% } %>
+			
+			var dataTable = $('#devices-datatable').DataTable({
+                responsive: false,
+                searching: false,
+                processing: true,
+                serverSide: true,
+                paging: true,
+                ajax: {
+                    url: "<%= prefix %>/getDevices",
+                    type: "POST",
+                    data: function ( data ) {
+                        data.keyword = $('#keyword').val();
+                    }
+                },
+                columnDefs: [
+                  {
+                    orderable: false,
+                    targets: 0,
+                  }
+                ],
+                oLanguage: {
+                  sLengthMenu: "_MENU_",
+                  sSearch: "",
+                },
+                aLengthMenu: [[10, 50, 100], [10, 50, 100]],
+                select: {
+                  style: "multi"
+                },
+                dom: '<"top"l>rt<"bottom"ip><"clear">',
+                order: [],
+                bInfo: true,
+                pageLength: 10,
+                buttons: [],
+                language: { "infoFiltered": "" },
+                columns: [
+                    {"data": "no"},
+                    {"data": "device_number"},
+					{"data": "status"},
+					{"data": "user"},
+                    <% if(session.roles.includes('createDevices')) { %>
+                    {"data": "action"}
+                    <% } %>
+                ],
+                initComplete: function(){
+					<% if(session.roles.includes('createDevices')) { %>
+				    	$("div.top").append(createButton);
+						$("div.top").append(importButton);
+					<% } %>
+					<% if(session.roles.includes('downloadDevices')) { %>
+						$("div.top").append(downloadButton);
+					<% } %>           
+				}
+            });
+
+            $('#btnSearch').click(function(){ //button filter event click
+                dataTable.ajax.reload();  //just reload table
+            });
+
+            $('#btnReset').click(function(){ //button reset event click
+                $('#form-filter')[0].reset();
+                dataTable.ajax.reload();  //just reload table
+            });
+
+			/////Show error message on device id input box
+			$('#deviceId').click(function () {
+                document.getElementById('device_errormessage').style.display = 'none';
+            });
+
+			$('#edit_deviceId').click(function () {
+                document.getElementById('error_device_errormessage').style.display = 'none';
+            });
+			
+
+			/////Create device modal open
+			$(document).on('click',"#createDevice",function(){
+				$('#createDeviceModel').modal('show');
+			});
+
+			/////Import device modal open
+			$(document).on('click',"#importDevice",function(){
+				$('#importDeviceModel').modal('show');
+			});
+
+			function saveDevice()
+            {
+                var deviceId = document.getElementById('deviceId');
+
+                if(deviceId.value == '')
+                {
+                    document.getElementById('device_errormessage').style.display = 'block';
+                }
+                else
+                {
+                    document.getElementById('device_errormessage').style.display = 'none';
+
+                    const data = { "deviceId": deviceId.value};
+                    
+                    const other_params = {
+                        headers: { "content-type": "application/json; charset=UTF-8" },
+                        body: JSON.stringify(data),
+                        method: "POST",
+                        mode: "cors"
+                    };
+
+                    fetch('<%= prefix %>/saveDevice', other_params)
+                        .then(function (response) {
+                            if (!response.ok) {
+                                throw new Error("Could not reach the API: " + response.statusText);
+                            }
+
+                            return response.json();
+                        }).then(data => {
+							if(data.msg == 'success')
+                            {
+								window.location.href = '<%= prefix %>/devices';
+							}
+							else if(data.msg == 'error')
+							{
+								window.location.href = '<%= prefix %>/devices';
+							}
+                        }).catch(error => {
+                            console.log(error);
+                        })
+                }
+            }
+
+			function editDevice(device_id)
+            {
+				$('#editDeviceModel').modal('show');
+
+				var edit_deviceId = document.getElementById('edit_deviceId');
+				var edit_Id = document.getElementById('edit_Id');
+
+				const data = { "deviceId": device_id};
+
+				const other_params = {
+                    headers: { "content-type": "application/json; charset=UTF-8" },
+                    body: JSON.stringify(data),
+                    method: "POST",
+                    mode: "cors"
+                };
+
+                fetch('<%= prefix %>/getDeviceNumber', other_params)
+                    .then(function (response) {
+                        if (!response.ok) {
+                            throw new Error("Could not reach the API: " + response.statusText);
+                        }
+
+                        return response.json();
+                    }).then(data => {
+						if(data.msg == 'success')
+                        {
+							edit_deviceId.value = data.data[0].device_number;
+							edit_Id.value = data.data[0].deviceId;
+						}
+						else if(data.msg == 'error')
+						{
+							edit_deviceId.value = '';
+							edit_Id.value = '';
+						}
+                    }).catch(error => {
+                        console.log(error);
+                    })
+			}
+
+			function updateDevice()
+            {
+                var edit_deviceId = document.getElementById('edit_deviceId');
+				var edit_Id = document.getElementById('edit_Id');
+
+                if(edit_deviceId.value == '')
+                {
+                    document.getElementById('edit_device_errormessage').style.display = 'block';
+                }
+                else
+                {
+                    document.getElementById('edit_device_errormessage').style.display = 'none';
+
+                    const data = { "id": edit_Id.value,"deviceId": edit_deviceId.value};
+                    
+                    const other_params = {
+                        headers: { "content-type": "application/json; charset=UTF-8" },
+                        body: JSON.stringify(data),
+                        method: "POST",
+                        mode: "cors"
+                    };
+
+                    fetch('<%= prefix %>/updateDevice', other_params)
+                        .then(function (response) {
+                            if (!response.ok) {
+                                throw new Error("Could not reach the API: " + response.statusText);
+                            }
+
+                            return response.json();
+                        }).then(data => {
+							if(data.msg == 'success')
+                            {
+								window.location.href = '<%= prefix %>/devices';
+							}
+							else if(data.msg == 'error')
+							{
+								window.location.href = '<%= prefix %>/devices';
+							}
+                        }).catch(error => {
+                            console.log(error);
+                        })
+                }
+            }
+
+            function deleteDevice(deviceId){
+                Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085D6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, delete it!',
+                        confirmButtonClass: 'btn btn-primary',
+                        cancelButtonClass: 'btn btn-danger ms-1',
+                        buttonsStyling: false,
+                }).then(function (result) {
+                    if (result.value) {
+                        $.ajax({
+                            url : "<%= prefix %>/deleteDevice",
+                            type : "POST",
+                            data : { 'deviceId' : deviceId, },
+                            success : function(data){
+                                window.location.reload(true);
+                            }
+                        });
+                    }
+                });
+            }
+
+		</script>
+
+	</body>
+</html>

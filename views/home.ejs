@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+	<head>
+		<title><%= title %></title>
+	    <%- include('inc/head.ejs') -%>
+	</head>
+
+	<body class="ltr main-body app sidebar-mini">
+
+		<!-- Loader -->
+		<div id="global-loader">
+			<img src="assets/img/loader.svg" class="loader-img" alt="Loader">
+		</div>
+		<!-- /Loader -->
+
+		<!-- Page -->
+		<div class="page">
+			<div>
+				<!-- main-header -->
+				<div class="main-header side-header sticky nav nav-item">
+					<div class="container-fluid main-container ">
+						<div class="main-header-left ">
+							<div class="responsive-logo">
+								<a href="index.html" class="header-logo">
+									<img src="assets/img/brand/logo.png" class="logo-1" alt="logo">
+									<img src="assets/img/brand/logo-white.png" class="dark-logo-1" alt="logo">
+								</a>
+							</div>
+							<div class="app-sidebar__toggle" data-bs-toggle="sidebar">
+								<a class="open-toggle" href="javascript:void(0);"><i class="header-icon fe fe-align-left" ></i></a>
+								<a class="close-toggle" href="javascript:void(0);"><i class="header-icons fe fe-x"></i></a>
+							</div>
+							<div class="main-header-center ms-3 d-sm-none d-md-none d-lg-block">
+								<h4 class="content-title mb-0 my-auto"><%= title %></h4>
+							</div>
+						</div>
+						<div class="main-header-right">
+							<button class="navbar-toggler navresponsive-toggler d-lg-none ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
+								<span class="navbar-toggler-icon fe fe-more-vertical "></span>
+							</button>
+							<div class="mb-0 navbar navbar-expand-lg navbar-nav-right responsive-navbar navbar-dark p-0">
+								<div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+									<%- include('inc/header.ejs') -%>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /main-header -->
+
+				<!-- main-sidebar -->
+				<div class="app-sidebar__overlay" data-bs-toggle="sidebar"></div>
+				<div class="sticky">
+					<%- include('inc/sidebar.ejs') -%>
+				</div>
+				<!-- main-sidebar -->
+			</div>
+
+			<!-- main-content -->
+			<div class="main-content app-content">
+
+				<!-- container -->
+				<div class="main-container container-fluid">
+
+					<div class="breadcrumb-header justify-content-between"></div>
+
+					<!-- row -->
+					<div class="row ">
+						<div class="col-lg-12">
+							<div class="card">
+								
+								<div class="card-body">
+
+									<!-- Dashboard box -->
+									<div class="row">
+										<div class="col-xl-3 col-lg-6 col-md-6">
+											<div class="card  bg-primary-gradient">
+												<div class="card-body">
+													<div class="counter-status d-flex md-mb-0">
+														<div class="counter-icon">
+															<i class="icon icon-people"></i>
+														</div>
+														<div class="ms-auto">
+															<h5 class="tx-13 tx-white-8 mb-3">App Users</h5>
+															<h2 class="counter mb-0 text-white"><%= totalUsers %></h2>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-xl-3 col-lg-6 col-md-6">
+											<div class="card  bg-danger-gradient">
+												<div class="card-body">
+													<div class="counter-status d-flex md-mb-0">
+														<div class="counter-icon text-warning">
+															<i class="icon icon-people"></i>
+														</div>
+														<div class="ms-auto">
+															<h5 class="tx-13 tx-white-8 mb-3">Globustrace Users</h5>
+															<h2 class="counter mb-0 text-white"><%= totalAdminUsers %></h2>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-xl-3 col-lg-6 col-md-6">
+											<div class="card  bg-success-gradient">
+												<div class="card-body">
+													<div class="counter-status d-flex md-mb-0">
+														<div class="counter-icon text-primary">
+															<i class="si si-layers"></i>
+														</div>
+														<div class="ms-auto">
+															<h5 class="tx-13 tx-white-8 mb-3">Linked Devices</h5>
+															<h2 class="counter mb-0 text-white"><%= totalLinkedDevices %></h2>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-xl-3 col-lg-6 col-md-6">
+											<div class="card  bg-warning-gradient">
+												<div class="card-body">
+													<div class="counter-status d-flex md-mb-0">
+														<div class="counter-icon text-success">
+															<i class="si si-layers"></i>
+														</div>
+														<div class="ms-auto">
+															<h5 class="tx-13 tx-white-8 mb-3">New Devices</h5>
+															<h2 class="counter mb-0 text-white"><%= totalUnlinkedDevices %></h2>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- Dashboard box closed -->
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- row closed -->
+				</div>
+				<!-- Container closed -->
+			</div>
+			<!-- main-content closed -->
+
+			<!-- Footer opened -->
+			<div class="main-footer ht-45">
+				<%- include('inc/footer.ejs') -%>
+			</div>
+			<!-- Footer closed -->
+
+		</div>
+		<!-- End Page -->
+
+		<%- include('inc/script.ejs') -%>
+		
+	</body>
+</html>
